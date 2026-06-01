@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control de Préstamos de Proyectores</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>Control de Préstamos de Proyectores</h1>
+
+<form action="sistema.php" method="POST">
+
+<input type="text" name="nombre"
+placeholder="Nombre del Profesor" required>
+
+<input type="text" name="categoria"
+placeholder="Grupo" required>
+
+<input type="text" name="dato"
+placeholder="Número de Proyector" required>
+
+<textarea name="observaciones"
+placeholder="Observaciones"></textarea>
+
+<button type="submit" name="guardar">
+Guardar Préstamo
+</button>
+
+</form>
+
+<br>
+
+<a href="sistema.php" class="boton">
+Consultar Registros
+</a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
