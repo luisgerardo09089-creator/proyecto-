@@ -6,38 +6,34 @@
 <title>Control de Préstamos de Proyectores</title>
 <link rel="stylesheet" href="estilos.css">
 </head>
-
 <body>
 
 <div class="contenedor">
 
 <h1>Control de Préstamos de Proyectores</h1>
 
-<form action="sistema.php" method="POST">
+<input type="text" id="nombre" placeholder="Nombre del Profesor">
 
-<input type="text" name="nombre"
-placeholder="Nombre del Profesor" required>
+<input type="text" id="grupo" placeholder="Grupo">
 
-<input type="text" name="categoria"
-placeholder="Grupo" required>
+<input type="text" id="proyector" placeholder="Número de Proyector">
 
-<input type="text" name="dato"
-placeholder="Número de Proyector" required>
+<textarea id="observaciones" placeholder="Observaciones"></textarea>
 
-<textarea name="observaciones"
-placeholder="Observaciones"></textarea>
-
-<button type="submit" name="guardar">
+<button onclick="guardar()">
 Guardar Préstamo
 </button>
 
-</form>
+<h2>Registros</h2>
 
-<br>
-
-<a href="sistema.php" class="boton">
-Consultar Registros
-</a>
+<table id="tabla">
+<tr>
+<th>Profesor</th>
+<th>Grupo</th>
+<th>Proyector</th>
+<th>Observaciones</th>
+</tr>
+</table>
 
 </div>
 
