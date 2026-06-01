@@ -4,7 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Control de Préstamos de Proyectores</title>
-<link rel="stylesheet" href="styles.css">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.contenedor{
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+}
+
+h1{
+    text-align: center;
+    color: #0d47a1;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background: #0d47a1;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #1565c0;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th{
+    background: #0d47a1;
+    color: white;
+}
+</style>
+
 </head>
 <body>
 
@@ -20,11 +80,11 @@
 
 <textarea id="observaciones" placeholder="Observaciones"></textarea>
 
-<button onclick="guardar()">
+<button onclick="guardarPrestamo()">
 Guardar Préstamo
 </button>
 
-<h2>Registros</h2>
+<h2>Préstamos Registrados</h2>
 
 <table id="tabla">
 <tr>
@@ -37,7 +97,79 @@ Guardar Préstamo
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+mostrarPrestamos();
+
+function guardarPrestamo(){
+
+let nombre = document.getElementById("nombre").value;
+let grupo = document.getElementById("grupo").value;
+let proyector = document.getElementById("proyector").value;
+let observaciones = document.getElementById("observaciones").value;
+
+if(nombre=="" || grupo=="" || proyector==""){
+    alert("Complete todos los campos");
+    return;
+}
+
+let prestamos =
+JSON.parse(localStorage.getItem("prestamos")) || [];
+
+prestamos.push({
+    nombre:nombre,
+    grupo:grupo,
+    proyector:proyector,
+    observaciones:observaciones
+});
+
+localStorage.setItem(
+"prestamos",
+JSON.stringify(prestamos)
+);
+
+document.getElementById("nombre").value="";
+document.getElementById("grupo").value="";
+document.getElementById("proyector").value="";
+document.getElementById("observaciones").value="";
+
+mostrarPrestamos();
+
+alert("Préstamo guardado correctamente");
+}
+
+function mostrarPrestamos(){
+
+let tabla = document.getElementById("tabla");
+
+tabla.innerHTML = `
+<tr>
+<th>Profesor</th>
+<th>Grupo</th>
+<th>Proyector</th>
+<th>Observaciones</th>
+</tr>
+`;
+
+let prestamos =
+JSON.parse(localStorage.getItem("prestamos")) || [];
+
+prestamos.forEach(function(p){
+
+tabla.innerHTML += `
+<tr>
+<td>${p.nombre}</td>
+<td>${p.grupo}</td>
+<td>${p.proyector}</td>
+<td>${p.observaciones}</td>
+</tr>
+`;
+
+});
+
+}
+
+</script>
 
 </body>
 </html>
